@@ -43,7 +43,12 @@ namespace TMDTShop.Migrations
                     BrandID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BrandName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Logo = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    
+                    
+                    
+                    
+                    
+                    = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
