@@ -95,6 +95,11 @@ namespace TMDTShop.Controllers
             }
             else
             {
+                var lstNewProduct = _context.Products
+                    .Include(n => n.Cate)
+                    .Where(n => n.IsActived && n.UnitInStock > 5)
+                    .OrderByDescending(n => n.DateCreated);
+                                ViewBag.ListNPD = lstNewProduct;
                 return View(product);
             }
         }
@@ -117,6 +122,6 @@ namespace TMDTShop.Controllers
 
             return View(models);
         }
- 
+
     }
 }

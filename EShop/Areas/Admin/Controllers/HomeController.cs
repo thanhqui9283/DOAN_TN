@@ -41,11 +41,11 @@ namespace TMDTShop.Areas.Admin.Controllers
             ViewBag.lstUnapprovedOrder = lstUnapprovedOrder;
 
             //Thống kê doanh thu tháng này
-            var mRevenue = _context.Orders.Where(x => x.TransactionStatusId == 3 && x.OrderDate.Month == DateTime.Now.Month).Sum(x => x.TotalMoney).Value.ToString("#,##0");
+            var mRevenue = _context.Orders.Where(x => x.TransactionStatusId != 1 && x.TransactionStatusId != 2 && x.OrderDate.Month == DateTime.Now.Month).Sum(x => x.TotalMoney).Value.ToString("#,##0");
             ViewBag.mRevenue = mRevenue;
 
             //Thống kê doanh thu năm này
-            var yRevenue = _context.Orders.Where(x => x.TransactionStatusId == 3 && x.OrderDate.Year == DateTime.Now.Year).Sum(x => x.TotalMoney).Value.ToString("#,##0");
+            var yRevenue = _context.Orders.Where(x => x.TransactionStatusId != 1 && x.TransactionStatusId != 2 && x.OrderDate.Year == DateTime.Now.Year).Sum(x => x.TotalMoney).Value.ToString("#,##0");
             ViewBag.yRevenue = yRevenue;
 
             //Thống kê sản phẩm bán chạy
