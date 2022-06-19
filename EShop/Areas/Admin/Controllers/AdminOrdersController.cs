@@ -9,6 +9,7 @@ using TMDTShop.Models;
 using PagedList.Core;
 using EmailServices;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
 
 namespace TMDTShop.Areas.Admin.Controllers
 {
@@ -17,18 +18,20 @@ namespace TMDTShop.Areas.Admin.Controllers
     {
         private readonly EcommerceVer2Context _context;
         private readonly IEmailSender _emailSender;
+        private readonly EmailConfiguration _configuration;
 
-        public AdminOrdersController(EcommerceVer2Context context, IEmailSender emailSender)
+        public AdminOrdersController(EcommerceVer2Context context, IEmailSender emailSender, EmailConfiguration configuration)
         {
             _emailSender = emailSender;
             _context = context;
+            _configuration = configuration;
         }
 
         #region index
         public IActionResult Index(string searchStr, int? page)
         {
             //chưa duyệt
-            var ecommerceVer2Context = from m in _context.Orders.Include(o => o.Customer).Include(o => o.TransactionStatus).Where(o => o.TransactionStatusId == 1).OrderByDescending(x => x.OrderDate) select m;
+            var ecommerceVer2Context = from m in _context.Orders.Include(o => o.Customer).Include(o => o.TransactionStatus).Where(o => o.TransactionStatusId == 1 && o.IsDeleted == false).OrderByDescending(x => x.OrderDate) select m;
             //Search
             ViewData["CurrentFilter"] = searchStr;
             if (!String.IsNullOrEmpty(searchStr))
@@ -193,7 +196,7 @@ namespace TMDTShop.Areas.Admin.Controllers
             {
                 try
                 {
-                    var donhang = _context.Orders.AsNoTracking().Include(x => x.Customer).Where(x=>x.OrderId==id).FirstOrDefault();
+                    var donhang = _context.Orders.AsNoTracking().Include(x => x.Customer).Where(x => x.OrderId == id).FirstOrDefault();
                     if (donhang != null)
                     {
                         donhang.IsPaid = order.IsPaid;
@@ -247,8 +250,8 @@ namespace TMDTShop.Areas.Admin.Controllers
                                 _context.Update(product);
                             }
 
-                            var message = new Message(new string[] { donhang.Customer.Mail }, "Xác nhận đơn hàng", chitiet);
-                            _emailSender.SendEmail(message);
+                            var message = new Message(donhang.Customer.Mail, "Xác nhận đơn hàng", chitiet, _configuration);
+                            var res = _emailSender.SendEmailAsync(message);
                         }
                         // Nếu đơn hàng đã giao thì chuyển trạng thái Delete = true;
                         if (donhang.TransactionStatusId == 5)

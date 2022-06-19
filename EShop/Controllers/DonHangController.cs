@@ -50,8 +50,8 @@ namespace TMDTShop.Controllers
             var chitietdonhang = _context.OrderDetails
                 .Include(x => x.Product).AsNoTracking()
                 .Where(x => x.OrderId == id)
-                .OrderBy(x => x.OrderDetailId).ToList(); // ma de kieu do thi no bi conflict
-            XemDonHang donHang = new XemDonHang(); // khoi tao viewmodel, oce nay dm k thay, TA TV lung tung dau ca mat
+                .OrderBy(x => x.OrderDetailId).ToList(); 
+            XemDonHang donHang = new XemDonHang(); 
             donHang.DonHang = donhang;
             donHang.ChiTietDonHang = chitietdonhang;
             ViewBag.donHang = donHang;
@@ -70,6 +70,12 @@ namespace TMDTShop.Controllers
                 if (_Order != null)
                 {
                     _Order.IsDeleted = true;
+                    foreach (var item in _Order.OrderDetails)
+                    {
+                        var product = _context.Products.AsNoTracking().Where(x => x.ProductId == item.ProductId).SingleOrDefault();
+                        product.UnitInStock = product.UnitInStock + item.Quantity;
+                        _context.Update(product);
+                    }
                     _context.Update(_Order);
                     _context.SaveChanges();
                 }

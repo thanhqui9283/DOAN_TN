@@ -37,7 +37,7 @@ namespace TMDTShop.Areas.Admin.Controllers
             ViewBag.sumProduct = lstProduct;
 
             //Thống kê những đơn hàng chưa duyệt
-            var lstUnapprovedOrder = _context.Orders.Where(x => x.TransactionStatusId == 1).Count();
+            var lstUnapprovedOrder = _context.Orders.Where(x => x.TransactionStatusId == 1 && x.IsDeleted == false).Count();
             ViewBag.lstUnapprovedOrder = lstUnapprovedOrder;
 
             //Thống kê doanh thu tháng này

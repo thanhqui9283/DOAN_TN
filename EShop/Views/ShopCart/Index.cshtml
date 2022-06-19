@@ -82,10 +82,10 @@
                 $("#miniCart").load("/AjaxContent/NumberCart")
             }
 
-            $(".cart-plus-minus-box").click(function () {
-                var productID = $(this).attr("data-mahh");
+            $(".qtybutton").click(function () {
+                var productID = $(".cart-plus-minus-box").attr("data-mahh");
                 console.log(productID);
-                var qty1 = parseInt($(this).val());
+                var qty1 = parseInt($(".cart-plus-minus-box").val());
                 console.log(productID);
                 $.ajax({
                     url: "api/cart/update",

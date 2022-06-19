@@ -25,6 +25,7 @@ namespace TMDTShop.Controllers
         public INotyfService _notyfService { get; } //Import services
         private readonly string _clientId;
         private readonly string _sercretKey;
+        private IConfiguration configuration;
 
         public decimal TygiaUSD = 23000;
 
@@ -32,8 +33,9 @@ namespace TMDTShop.Controllers
         {
             _notyfService = notyfService;
             _context = context;
-            _clientId = "AbtX5Y3y3Ubpu8szhQt7TRTataPTU2AJDoXWAZYB3Yd146xLgk1uCcU2AGLuRYVUtXQ6qc8xrNWA9D6h";
-            _sercretKey = "ELbkNgUwtUw3-FqspkjsWQPJ3EjmbOPUkCapg57keQylBMRwp0JUh40jJTFnV6WjYsqQ8FgWYFL3k8si";
+            configuration = config;
+            _clientId = configuration.GetValue<string>("PayPalSettings:ClientId");
+            _sercretKey = configuration.GetValue<string>("PayPalSettings:SecretKey");
         }
 
         #region Khởi tạo giỏ hàng
