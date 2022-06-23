@@ -331,8 +331,8 @@ namespace TMDTShop.Models
             {
                 entity.Property(e => e.Descriptions)
                     .IsRequired()
-                    .HasMaxLength(200)
-                    .HasDefaultValueSql("(N'')");
+                    .HasDefaultValueSql("(N'')")
+                    .HasColumnType("nvarchar(max)");
 
                 entity.Property(e => e.RoleName).HasMaxLength(50);
             });
