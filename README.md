@@ -41,7 +41,10 @@ Xin cám ơn!
 
 ## Hình ảnh Demo:
 
-<img src="lib/screenshot_review/Screenshot_1655480665.png" width="300" />
-<img src="lib/screenshot_review/Screenshot_1655480697.png" width="300" />
-<img src="lib/screenshot_review/Screenshot_1655480722.png" width="300" />
-<img src="lib/screenshot_review/Screenshot_1655481073.png" width="300" />
+<img src="Img/Home" width="300" />
+<img src="Img/Laptop" width="300" />
+<img src="Img/Cart" width="300" />
+<img src="Img/Pay" width="300" />
+<img src="Img/Admin" width="300" />
+
+
