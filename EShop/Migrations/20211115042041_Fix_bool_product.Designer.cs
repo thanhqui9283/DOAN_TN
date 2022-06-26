@@ -230,7 +230,7 @@ namespace TMDTShop.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<DateTime?>("CreateDate")
-                        .HasColumnType("datetime");
+                       .HasColumnType("datetime");
 
                     b.Property<int?>("District")
                         .HasColumnType("int");
