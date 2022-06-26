@@ -1,19 +1,50 @@
-Phụ lục 1: Hướng dẫn cài đặt
-Bước 1 : Cần cài đặt SQL server khuyến nghị nên 2017 2019
-Bước 2 : Cần cài đặt Visual studio  khuyến nghị nên 2017 2019 
-Bước 3 : vào https://github.com/thanhqui9283/DOAN_TN để tải source code về
-Bước 4 :khi đã tải về Import database EcommerceVer2.sql vào trong Sql Server
-Bước 5 : mở Chương trình lên vào appsettings.json -> ConnectionStrings     đưa database của máy mình vào và chạy chương trình 
-Phụ lục 2: Hướng dẫn sử dụng
-        Vào trải nghiệm mua sắm bình thường vào đăng ký 1 tài khoản mới để sử dụng  (user)
-     Admin
-     Login - Admin Management
-     Tài khoản admin
-         User: admin
-        Password : 123456
-        - path: /admin/dashboard/index -> sẽ tự direct về trang Login cho Admin
-       - hoặc path: /admin/login/index để vào thẳng trang đăng nhập
-    Tài khoản SandBox Paypal
-     - Acc : sb-pcndl8826715@personal.example.com
-     - Pass: 12345678
+# ĐỒ ÁN TỐT NGHIỆP NĂM HỌC 2021-2022
+
+
+* Họ và tên: NGUYỄN THANH QUI
+
+* MSV: 5951071086
+
+* Lớp: Công nghệ thông tin-K59
+
+* GVHD: ThS. NGUYỄN LÊ MINH
+
+
+## Đề tài: Xây dựng WEBSITE bán thiết bị điện tử
+
+
+## Phần 1: Công nghệ sử dụng:
+ * Sử dụng ngôn ngữ lập trình C#
+ * Framework:  Entity framework 
+ * Visual Studio 2019
+ * SQL server 2019
+
+## Phần 2: Các chức năng chính:
+1. Phân quyền 
+2. Tìm kiếm sản phẩm 
+3. Gửi mail cho khách hàng.
+4. Thêm, Xóa, Sửa sản phẩm.
+5. Thanh toán online PAYPAL
+6. Quản lý sản phẩm theo danh mục và theo thương hiệu.
+
+
+
+## Hướng dẫn sử dụng:
+1. Cần cài đặt SQL server khuyến nghị nên 2017 2019
+2. Cần cài đặt Visual studio  khuyến nghị nên 2017 2019 
+3. vào https://github.com/thanhqui9283/DOAN_TN để tải source code về
+4. khi đã tải về Import database EcommerceVer2.sql vào trong Sql Server
+5. mở Chương trình lên vào appsettings.json -> ConnectionStrings đưa database của máy mình vào và chạy chương trình 
+
+
+Xin cám ơn!
+
+## Hình ảnh Demo:
+
+<img src="DOAN_TN/Img/Home" width="300" />
+<img src="DOAN_TN/Img/Laptop" width="300" />
+<img src="DOAN_TN/Img/Cart" width="300" />
+<img src="DOAN_TN/Img/Pay" width="300" />
+<img src="DOAN_TN/Img/Admin" width="300" />
+
 
