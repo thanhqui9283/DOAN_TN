@@ -41,10 +41,10 @@ Xin cám ơn!
 
 ## Hình ảnh Demo:
 
-<img src="Img/Home" width="300" />
-<img src="Img/Laptop" width="300" />
-<img src="Img/Cart" width="300" />
-<img src="Img/Pay" width="300" />
-<img src="Img/Admin" width="300" />
+<img src="DOAN_TN/Img/Home" width="300" />
+<img src="DOAN_TN/Img/Laptop" width="300" />
+<img src="DOAN_TN/Img/Cart" width="300" />
+<img src="DOAN_TN/Img/Pay" width="300" />
+<img src="DOAN_TN/Img/Admin" width="300" />
 
 
