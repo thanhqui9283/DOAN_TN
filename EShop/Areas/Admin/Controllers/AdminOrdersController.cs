@@ -250,8 +250,8 @@ namespace TMDTShop.Areas.Admin.Controllers
                                 _context.Update(product);
                             }
 
-                            var message = new Message(donhang.Customer.Mail, "Xác nhận đơn hàng", chitiet, _configuration);
-                            var res = _emailSender.SendEmailAsync(message);
+                            var message = new Message(new string[] { donhang.Customer.Mail }, "Xác nhận đơn hàng", chitiet);
+                            var res = Task.FromResult(_emailSender.SendEmailAsync(message));
                         }
                         // Nếu đơn hàng đã giao thì chuyển trạng thái Delete = true;
                         if (donhang.TransactionStatusId == 5)

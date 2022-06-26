@@ -1,25 +1,22 @@
 ﻿using MimeKit;
-using SendGrid.Helpers.Mail;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace EmailServices
 {
     public class Message
     {
-        private readonly EmailConfiguration _emailConfig;
-        public EmailAddress FromMail { get; set; }
-        public EmailAddress To { get; set; }
+        public List<MailboxAddress> To { get; set; }
         public string Subject { get; set; }
         public string Content { get; set; }
 
-        public Message(string to, string subject, string content, EmailConfiguration configuration)
+        public Message(IEnumerable<string> to, string subject, string content)
         {
-            _emailConfig = configuration;
-            FromMail = new EmailAddress(_emailConfig.Mail);
-            FromMail.Name = _emailConfig.From;
-            //FromMail.Name = _emailConfig.From;
-            To = new EmailAddress(to);
+            To = new List<MailboxAddress>();
+            To.AddRange(to.Select(x => new MailboxAddress(x)));
             Subject = subject;
             Content = content;
         }

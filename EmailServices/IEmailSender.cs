@@ -1,10 +1,14 @@
-﻿using SendGrid;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace EmailServices
 {
     public interface IEmailSender
     {
-        Task<Response> SendEmailAsync(Message message);
+        void SendEmail(Message message);
+        Task SendEmailAsync(Message message);
     }
 }
