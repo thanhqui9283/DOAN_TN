@@ -42,7 +42,7 @@ Xin cám ơn!
 ## Hình ảnh Demo:
 
 
-<img src="Img/Home.png" width="300" /><br>
+<img src="Img/Home.png" width="300" /><p></p>
 <img src="Img/Laptop.png" width="300" /><br>
 <img src="Img/Cart.png" width="300" /><br>
 <img src="Img/Pay.png" width="300" /><br>
