@@ -41,11 +41,11 @@ Xin cám ơn!
 
 ## Hình ảnh Demo:
 
-<img src= "DOAN_TN/main/Img/Admin.png"  width="300" />
-<img src="img/Admin.png" width="300" />
-<img src="DOAN_TN/Img/Laptop" width="300" />
-<img src="DOAN_TN/Img/Cart" width="300" />
-<img src="DOAN_TN/Img/Pay" width="300" />
-<img src="DOAN_TN/Img/Admin" width="300" />
+
+<img src="Img/Home.png" width="300" />
+<img src="Img/Laptop.png" width="300" />
+<img src="Img/Cart.png" width="300" />
+<img src="Img/Pay.png" width="300" />
+<img src="Img/Admin.png" width="300" />
 
 
