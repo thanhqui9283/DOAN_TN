@@ -41,7 +41,7 @@ Xin cám ơn!
 
 ## Hình ảnh Demo:
 
-<img src="DOAN_TN/blob/main/Img/Admin.png" width="300" />
+<img src="DOAN_TN/main/Img/Admin.png" width="300" />
 <img src="DOAN_TN/Img/Laptop" width="300" />
 <img src="DOAN_TN/Img/Cart" width="300" />
 <img src="DOAN_TN/Img/Pay" width="300" />
