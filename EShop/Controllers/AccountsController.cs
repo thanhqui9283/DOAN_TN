@@ -42,6 +42,7 @@ namespace TMDTShop.Controllers
         public IActionResult MyAccount()
         {
             var AccID = HttpContext.Session.GetString("CustommerId");
+           
             if (AccID != null)
             {
                 var _custommer = _context.Customers.AsNoTracking().SingleOrDefault(x => x.CustommerId == Convert.ToInt32(AccID));
@@ -371,7 +372,8 @@ namespace TMDTShop.Controllers
                     if (CTM.Password != pass)
                     {
                         _notyfService.Error("Thông tin đăng nhập không chính xác");
-                        return View(CTM);
+                        //return View(CTM);
+                        return RedirectToAction("Login", "Accounts");
                     }
 
                     //Kiểm tra Acc có bị Disable không

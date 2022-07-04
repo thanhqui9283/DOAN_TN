@@ -134,10 +134,13 @@ namespace TMDTShop.Controllers
                             Qty = qty.HasValue ? qty.Value : 1, // chưa có mặc định nó về 1
                             product = hh
                         });
+                        
                     }
                     else
                     {
-                        carts[index].Qty = qty.Value;
+                        if (hh.UnitInStock >= qty.Value)
+                            carts[index].Qty = qty.Value;
+                        else return Json(new { succcess = false,mess = "Số lượng đặt lớn hơn số lượng tồn kho" });
                     }
 
                     GetSession.Set(HttpContext.Session, "GioHang", carts);
@@ -170,6 +173,36 @@ namespace TMDTShop.Controllers
                 return Json(new { succcess = true });
             }
             catch (Exception)
+            {
+                return Json(new { succcess = false });
+            }
+        }
+        //
+        [HttpPost]
+        [Route("api/cart/checktonkho")]
+        public IActionResult CheckCart(int productId, int? qty)
+        {
+            List<CartItem> carts = GioHang;
+            try
+            {
+                if (carts != null)
+                {
+
+                    //CartItem item = GioHang.SingleOrDefault(x => x.product.ProductId == productId);
+                    //if (item != null && qty.HasValue) // giỏ hàng có đồ
+                    //{
+                    //    item.Qty = qty.Value; // số lượng = số lượng nhập vào
+                    //}
+                    
+                    Product hh = _context.Products.SingleOrDefault(p => p.ProductId == productId);
+                    if(hh.UnitInStock>=qty.Value)
+                        return Json(new { succcess = true, data = true }) ;
+                    return Json(new { succcess = true, data = false });
+                }
+                return Json(new { succcess = false ,data=false});
+
+            }
+            catch
             {
                 return Json(new { succcess = false });
             }

@@ -44,7 +44,8 @@ namespace TMDTShop.Areas.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    // phải include thằng role vào thì em mới lấy dc du lieu tu bang role
+                 
+                    // phải include thằng role vào thì mới lấy dc du lieu tu bang role
                     var CTM = _context.Accounts.Include(x=>x.Role).AsNoTracking().SingleOrDefault(x => x.Username.Trim() == model.UserName);
                     if (CTM == null)
                     {
@@ -57,7 +58,9 @@ namespace TMDTShop.Areas.Admin.Controllers
                     if (CTM.Password != pass)
                     {
                         _notyfService.Error("Thông tin đăng nhập không chính xác"); // so sánh pass
-                        return View(CTM);
+                                                                                    // return View(CTM);
+                        return Redirect("/Admin/Login/Index?ReturnUrl=%2Fadmin%2Fdashboard%2Findex");
+                       // return RedirectToAction("Login", "Accounts");
                     }
 
                     //Kiểm tra Acc có bị Disable không
@@ -82,9 +85,10 @@ namespace TMDTShop.Areas.Admin.Controllers
                     ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                     await HttpContext.SignInAsync(claimsPrincipal);
                     _notyfService.Custom("Đăng nhập thành công!", 5, "#EAB14E", "fas fa-crown");
-                    return RedirectToAction("Index", "Home", new { Area = "Admin" }); // sau khi tài khoản mật khẩu đúng các kiểu r thì get từ session ra xong direct về index của Home admin
+                    return RedirectToAction("Index", "Home", new { Area = "Admin" });
+                    // sau khi tài khoản mật khẩu đúng  r thì get từ session ra xong direct về index của Home admin
 
-                    //đợi t x
+                 
                 }
                 _notyfService.Error("Thông tin đăng nhập không chính xác");
                 return Redirect("/Admin/Login/Index?ReturnUrl=%2Fadmin%2Fdashboard%2Findex");

@@ -96,10 +96,14 @@
                         qty: qty1
                     },
                     success: function (result) {
-                        window.location = 'cartItem.html';
+                        console.log(result.succcess);
+                        if (result.succcess)
+                            window.location = 'cartItem.html';
+                        else alert(result.mess);
+                      
                     },
                     error: function (rs) {
-                        alert("Lỗi cập nhật !!!");
+                        alert(rs.mess)
                     }
                 });
             });

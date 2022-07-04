@@ -143,7 +143,7 @@
             <!-- section title -->
             <div class="col-md-12">
                 <div class="section-title">
-                    <h3 class="title">Sản phẩm liên quan</h3>
+                    <h3 class="title">Sản phẩm gợi ý</h3>
                 </div> 
             </div>
             <!-- /section title -->
@@ -179,22 +179,27 @@
                 $(".add-to-cart-btn").click(function () {
                     var productID = $('#ProductId').val();
                     var qty1 = $('#txtsoluong').val();
-                    $.ajax({
-                        url: '/api/cart/add',
-                        type: "POST",
-                        dataType: "JSON",
-                        data: {
-                            productId: productID,
-                            qty: qty1
-                        },
-                        success: function (response) {
-                            loadHeaderCart();
-                            location.reload();
-                        },
-                        error: function (error) {
-                            alert("Lỗi khi post data: " + error.responseText);
-                        }
-                    });
+                    if (@Model.UnitInStock>=txtsoluong.value) {
+                        $.ajax({
+                            url: '/api/cart/add',
+                            type: "POST",
+                            dataType: "JSON",
+                            data: {
+                                productId: productID,
+                                qty: qty1
+                            },
+                            success: function (response) {
+                                loadHeaderCart();
+                                location.reload();
+                            },
+                            error: function (error) {
+                                alert("Lỗi khi post data: " + error.responseText);
+                            }
+                        });
+                    }
+                    else {
+                        alert("Số lượng vượt quá tồn kho. Kho chỉ còn " + @Model.UnitInStock);
+                    }
                 });
             });
 

@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using EmailServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using TMDTShop.Models;
 using PagedList.Core;
-using EmailServices;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Configuration;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using TMDTShop.Models;
 
 namespace TMDTShop.Areas.Admin.Controllers
 {
@@ -31,7 +29,7 @@ namespace TMDTShop.Areas.Admin.Controllers
         public IActionResult Index(string searchStr, int? page)
         {
             //chưa duyệt
-            var ecommerceVer2Context = from m in _context.Orders.Include(o => o.Customer).Include(o => o.TransactionStatus).Where(o => o.TransactionStatusId == 1 && o.IsDeleted == false).OrderByDescending(x => x.OrderDate) select m;
+            var ecommerceVer2Context = from m in _context.Orders.Include(o => o.Customer).Include(o => o.TransactionStatus).Where(o => o.TransactionStatusId == 1 && o.IsDeleted == false || o.TransactionStatusId == 2 && o.IsDeleted == false).OrderByDescending(x => x.OrderDate) select m;
             //Search
             ViewData["CurrentFilter"] = searchStr;
             if (!String.IsNullOrEmpty(searchStr))
@@ -234,12 +232,20 @@ namespace TMDTShop.Areas.Admin.Controllers
                         // Nếu trạng thái đơn hàng đã xác nhận thông tin thah toán thì chuyển qua bước vận chuyển -> trừ vào số lượng hàng trong kho
                         if (donhang.TransactionStatusId == 3)
                         {
+
                             string chitiet = "";
                             for (int i = 0; i < orderdetail.Count(); i++)
                             {
                                 var product = _context.Products
+
                                     .Where(x => x.ProductId == orderdetail[i].ProductId)
+
                                     .FirstOrDefault();
+                                //if (product.UnitInStock < orderdetail[i].Quantity)
+                                //{
+
+                                //    return View("NotEnoughStock");
+                                //}
                                 product.UnitInStock = (product.UnitInStock - orderdetail[i].Quantity);
                                 chitiet += "Tên sản phẩm : " + product.ProductName.ToString();
                                 chitiet += " - Số lượng : " + orderdetail[i].Quantity.Value.ToString();
@@ -248,14 +254,17 @@ namespace TMDTShop.Areas.Admin.Controllers
                                 chitiet += "<br />";
                                 chitiet += "Tổng thanh toán: " + donhang.TotalMoney.Value.ToString("#,##0") + " VNĐ";
                                 _context.Update(product);
-                            }
 
+
+                            }
                             var message = new Message(new string[] { donhang.Customer.Mail }, "Xác nhận đơn hàng", chitiet);
                             var res = Task.FromResult(_emailSender.SendEmailAsync(message));
+
                         }
                         // Nếu đơn hàng đã giao thì chuyển trạng thái Delete = true;
                         if (donhang.TransactionStatusId == 5)
                         {
+                            donhang.IsPaid = true;
                             donhang.IsDeleted = true;
                         }
                     }
